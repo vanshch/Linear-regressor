@@ -8,7 +8,6 @@ def main() -> None:
     # getting the data through csv
     PATH_FILE = "california_housing_1000.csv"
     SPLIT = 0.8  # to set
-    # STEP_SIZE = 45    # to set
 
     reggressor = Linear_Regression()  # Left adding the parameters
     data = reggressor.getFile(PATH_FILE)
