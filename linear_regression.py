@@ -28,6 +28,18 @@ class Linear_Regression:
     def splitData(
         self, data: np.ndarray, split: float
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+        # validation 
+        if data is None:
+            raise ValueError("Data is none")
+        if not isinstance(data, np.ndarray):
+            raise TypeError("Data must be a numpy array")
+        if data.size == 0:
+            raise ValueError("Data cannot be empty")
+        if not 0 < split < 1:
+            raise ValueError("Split must be between 0 and 1")
+        if data.shape[1] < 2:
+            raise ValueError("Data must have at least 2 columns")
+
         # first shuffle the data
         shuffled_data = data.copy()
         np.random.shuffle(shuffled_data)
@@ -47,7 +59,15 @@ class Linear_Regression:
         # returning the values
         return X_train, X_test, Y_train, Y_test
 
-    def fitTrain(self, X_train: np.array, Y_train: np.array) -> Optional[np.ndarray]:
+    def fitTrain(self, X_train: np.ndarray, Y_train: np.ndarray) -> Optional[np.ndarray]:
+        # validation 
+        if X_train is None or Y_train is None:
+            raise ValueError("Training data cannot be None")
+        if X_train.shape[0] != Y_train.shape[0]:
+            raise ValueError("X_train and Y_train must have same number of samples")
+        if X_train.shape[0] == 0:
+            raise ValueError("Training data cannot be empty")
+
         # adding bias term for intercept
         X_train = np.hstack([np.ones((X_train.shape[0], 1)), X_train])
 
